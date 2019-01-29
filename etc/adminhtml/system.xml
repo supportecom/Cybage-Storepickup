@@ -1,0 +1,157 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+  * Copyright (c) 1995-2019 Cybage Software Pvt. Ltd., India 
+  * http://www.cybage.com/pages/centers-of-excellence/ecommerce/ecommerce.aspx
+  */ 
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="stores_tab" translate="label" sortOrder="10">
+            <label>Cybage Stores</label>
+        </tab>
+        <section id="stores_section" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Settings</label>
+            <tab>stores_tab</tab>
+            <resource>Cybage_Storepickup::settings</resource>
+            <group id="stores_group" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+                <field id="enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Module Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="user_creation" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Create User For Stores </label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+             <group id="stores_order_settings" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Store Pickup Order Settings</label>
+                <field id="order_hold_time" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Max Hold Time of Store Pickup orders</label>
+                    <comment><![CDATA[Max Hold time for orders (In Days)]]></comment>
+                </field>
+                <field id="order_enable_autocancel" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Auto Cancel delayed Store Pickups</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                     <comment>
+                        <![CDATA[Cron settings will be used to cancel orders which are not picked up by customer after exceeding the hold time]]>
+                    </comment>
+                </field>
+            </group>
+            <group id="storepickup_map" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Map settings</label>
+                <field id="api_key" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Gmaps Api Key</label>
+                    <validate>required-entry</validate>
+                    <comment>
+                        <![CDATA[Please change this value to your API key. This default key may stop working due to daily limits. This field is required.]]>
+                    </comment>
+                    <tooltip>
+                        <![CDATA[To get a gmaps api key just login to your google account and go https://developers.google.com/maps/documentation/javascript/get-api-key and press on "get key".]]>
+                    </tooltip>
+                </field>                
+                 <field id="geocodeapi_url" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Geocode Api Url</label>
+                    <validate>required-entry</validate>
+                    <comment>
+                        <![CDATA[Please change this value to your Geocode API Url. This field is required.]]>
+                    </comment>
+                </field>                
+                <field id="zoom" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Zoom</label>
+                    <comment>
+                        <![CDATA[Zoom level when loading the map, default is 13. Insert values between 1 and 20.]]>
+                    </comment>
+                </field>                
+                <field id="latitude" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Latitude</label>
+                    <comment>
+                        <![CDATA[Default latitude when loading the map. It is used for centering the map at load time]]>
+                    </comment>
+                </field>                
+                <field id="longitude" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Longitude</label>
+                    <comment>
+                        <![CDATA[Default longitude when loading the map. It is used for centering the map at load time]]>
+                    </comment>
+                </field>                
+                <field id="radius" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Radius</label>
+                    <comment>
+                        <![CDATA[Radius when user searches your stores. Insert values in km.]]>
+                    </comment>
+                </field>                          
+            </group>
+            <group id="storepickup_individual" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Settings for individual Stores</label>
+                <field id="zoom_individual" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Zoom on Store details</label>
+                    <comment>
+                        <![CDATA[Zoom level when loading the map, default is 16. Insert values between 1 and 20.]]>
+                    </comment>
+                </field>
+            </group>
+            
+            <group id="storepickup_error_message" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Settings for Error Message</label>
+                <field id="method_not_available" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Shipping Method Not Available</label>
+                    <comment>
+                        <![CDATA[Message for shipping method is not available.]]>
+                    </comment>
+                </field>
+                <field id="method_not_available_for_address" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Shipping Method Not Available For Location</label>
+                    <comment>
+                        <![CDATA[Message for shipping method is not available for specific location]]>
+                    </comment>
+                </field>
+            </group>
+        </section>
+        <section id="carriers">
+            <!--[Create group of carrier's fields with identifier]-->
+            <group id="storepickup" translate="label" type="text" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="1">
+                <!--[Carrier's label on backend]-->
+                <label>Store Pickup</label>
+                <!--[Carrier's activate field with yes/no source model for dropdown]-->
+                <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>Enabled For Checkout</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>                
+                <!--[Carrier's title field for storefront]-->
+                <field id="title" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Title</label>
+                </field>
+                <field id="name" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Method Name</label>
+                </field>
+                <field id="price" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>Shipping Cost</label>
+                    <validate>validate-number validate-zero-or-greater</validate>
+                </field>
+                <field id="sort_order" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Sort Order</label>
+                </field>
+                <field id="sallowspecific" translate="label" type="select" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Ship to Applicable Countries</label>
+                    <frontend_class>shipping-applicable-country</frontend_class>
+                    <source_model>Magento\Shipping\Model\Config\Source\Allspecificcountries</source_model>
+                </field>
+                <field id="specificcountry" translate="label" type="multiselect" sortOrder="91" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Ship to Specific Countries</label>
+                    <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
+                    <can_be_empty>1</can_be_empty>
+                </field>
+                <field id="showmethod" translate="label" type="select" sortOrder="92" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Show Method if Not Applicable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="specificerrmsg" translate="label" type="textarea" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Displayed Error Message</label>
+                </field>
+            </group>
+        </section>      
+    </system>
+</config>

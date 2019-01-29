@@ -1,0 +1,47 @@
+<?php
+/**
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * It is available on the World Wide Web at:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you are unable to access it on the World Wide Web, please send an email
+ * To: Support_ecom@cybage.com.  We will send you a copy of the source file.
+ *
+ * @package    Cybage_Storepickup
+ * @copyright  Copyright (c) 1995-2019 Cybage Software Pvt. Ltd., India
+ * http://www.cybage.com/coe/e-commerce
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @author     Cybage Software Pvt. Ltd. <Support_ecom@cybage.com>
+ */
+?>
+<div class="control"  data-mage-init='{
+        "storepickup" : {
+            "ajaxUrl" : "<?php /* @escapeNotVerified */ echo $block->getUrl('storepickup/ajax/stores') ?>", 
+            "latitude" : <?php  /* @escapeNotVerified */ echo json_encode($block->getLatitudeSettings()) ?>,
+            "longitude" : <?php  /* @escapeNotVerified */ echo json_encode($block->getLongitudeSettings()) ?>,
+            "radius" : <?php  /* @escapeNotVerified */ echo json_encode($block->getRadiusSettings()) ?>
+        }
+    }'>
+    <label for="addressInput" class="admin__field-label"><?= /* @escapeNotVerified */ __('Your Store Pickup Location:') ?></label>
+    <input class="required-entry input-text admin__control-text required-entry _required" type="text" id="autocomplete" title="Enter Location to search nearby Stores" placeholder="Enter Location to search nearby Stores" size="35"></input>
+    <input type="button" id="searchButton" title="Search Nearby Stores" value="Search" class="action-default scalable action-secondary">
+</div>
+<br/>
+<div class="storepickup-results"></div>
+<div>
+    <label for="addressSelect" style="visibility:hidden" id="locationLabel"><?= /* @escapeNotVerified */ __('Select Pickup Store:') ?></label>
+    <select id="locationSelect" style="width:100%;visibility:hidden" name="order[pickupstore_id]" class="select required-entry admin__control-select validate-select"></select>
+</div>
+<div id="map" style="width: 100%; height: 80%"></div>        
+
+<script>
+require.config({
+    map: {
+        '*': {
+            'googleMapPlaceLibrary': 'https://maps.googleapis.com/maps/api/js?key=<?php echo $block->getApiKeySettings()?>&v=3.exp&libraries=places'
+        }
+    }
+ });
+</script>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+/**
+  * Copyright (c) 1995-2019 Cybage Software Pvt. Ltd., India 
+  * http://www.cybage.com/pages/centers-of-excellence/ecommerce/ecommerce.aspx
+  */ 
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="left">
+            <block class="Cybage\Storepickup\Block\Adminhtml\Stores\Edit\Tabs" name="adminhtml.stores.edit.tabs">
+                <block class="Cybage\Storepickup\Block\Adminhtml\Stores\Edit\Tab\Main" name="store_edit_tab_main"/>
+                <block class="Cybage\Storepickup\Block\Adminhtml\Stores\Edit\Tab\User" name="store_edit_tab_user"/>
+                <block class="Cybage\Storepickup\Block\Adminhtml\Stores\Edit\Tab\ProductsMap" name="store_edit_tab_product_mapping"/>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">main_section</argument>
+                    <argument name="block" xsi:type="string">store_edit_tab_main</argument>
+                </action>                
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">user_section</argument>
+                    <argument name="block" xsi:type="string">store_edit_tab_user</argument>
+                </action>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">product_mapping_section</argument>
+                    <argument name="block" xsi:type="string">store_edit_tab_product_mapping</argument>
+                </action>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">attachment_products</argument>
+                    <argument name="block" xsi:type="array">
+                        <item name="label" xsi:type="string">Manage Products</item>
+                        <item name="title" xsi:type="string">Manage Products</item>
+                        <item name="url" xsi:type="helper" helper="Cybage\Storepickup\Helper\Data::getProductsGridUrl"></item>
+                        <item name="class" xsi:type="string">ajax</item>
+                    </argument>
+                </action>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="content">
+            <block class="Cybage\Storepickup\Block\Adminhtml\Stores\Edit" name="adminhtml.stores.edit" />
+        </referenceContainer>
+    </body>
+</page>

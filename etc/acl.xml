@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+/**
+  * Copyright (c) 1995-2019 Cybage Software Pvt. Ltd., India 
+  * http://www.cybage.com/pages/centers-of-excellence/ecommerce/ecommerce.aspx
+  */ 
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Cybage_Storepickup::main" title="Cybage Stores" sortOrder="10">
+                    <resource id="Cybage_Storepickup::row_data_delete" title="Delete Stores" sortOrder="10" />
+                    <resource id="Cybage_Storepickup::settings" title="Settings" sortOrder="20" />
+                </resource>
+                <resource id="Cybage_Storepickup::add_row" title="Edit Store Profile" sortOrder="10" />
+                <resource id="Cybage_Storepickup::orders" title="Store Orders" sortOrder="20" />
+            </resource>
+        </resources>
+    </acl>
+</config>

@@ -1,0 +1,20 @@
+<!-- /** * Copyright (c) 1995-2019 Cybage Software Pvt. Ltd., India * http://www.cybage.com/pages/centers-of-excellence/ecommerce/ecommerce.aspx */ -->
+<div id="my-carrier-custom-block-wrapper" data-bind="visible: selectedMethod() == getShippingMethod()" >
+    <span data-bind="i18n: 'Enter a Location'"></span>
+    <input id="autocomplete" name="autocomplete" type="text" size="35" data-bind="attr: {placeholder: $t('Enter a location to search nearby store')}" />
+    <div class="primary">
+        <button  type="submit" name="searchButton" class="button action primary" id="searchButton" data-bind="click:searchLocations">
+            <span data-bind="i18n:'Search'"> </span>
+        </button>
+    </div>  
+    <div class="store-div">
+        <span data-bind="i18n: 'Select Pickup Store'"></span>
+        <select id="pickupstore_id" name="pickupstore_id" data-bind="event:{change:showMap}" style="visibility:visible"></select>
+    </div>
+    <div class="map-input" data-bind="scope:initAutocomplete()">
+        <div id="map" style="width: 100%; height: 500px" ></div> 
+    </div>	
+</div>
+<div class="message error custom-error" data-bind="visible: selectedMethod() == getShippingMethod()">
+    <div data-bind="text: error_message">&nbsp;</div>
+</div>

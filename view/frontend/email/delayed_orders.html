@@ -1,0 +1,46 @@
+<!-- 
+/**
+  * Copyright (c) 1995-2019 Cybage Software Pvt. Ltd., India 
+  * http://www.cybage.com/pages/centers-of-excellence/ecommerce/ecommerce.aspx
+  */ 
+-->
+<!--@subject Storepickup Order Cancelled   @-->
+<!--@vars {
+"var this.getUrl($store, 'admin')":"Store Account URL",
+} @-->
+ 
+{{template config_path="design/email/header_template"}} 
+ 
+<table>
+    <tr class="email-intro">
+        <td>
+            <p class="greeting">{{trans "Dear %customer_name," customer_name=$order.getCustomerName()}}</p>
+            <p>
+                {{trans 'This is to inform you that storepickup order placed by you has been cancelled due to your unavilablity at the pickup duration.'}}
+            </p>
+            <p>{{trans "Please review the order details below."}}</p>
+        </td>
+    </tr>
+    <tr class="email-information">
+        <td>
+            <table class="email-items">
+                <thead>
+                    <tr>
+                        <th class="item-info">{{trans "Order Id"}}</th>
+                        <th class="item-info">{{trans "Customer Name"}}</th>
+                        <th class="item-info">{{trans "Customer Email"}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th class="item-info">{{trans "#%increment_id" increment_id=$order.increment_id |raw}}</th>
+                        <th class="item-info">{{trans "%customer_name" customer_name=$order.getCustomerName()}}</th>
+                        <th class="item-info">{{trans "%customer_email" customer_email=$order.getCustomerEmail()}}</th>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+</table>
+ 
+{{template config_path="design/email/footer_template"}} <!--footer of template-->

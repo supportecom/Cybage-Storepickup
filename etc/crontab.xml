@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+  * Copyright (c) 1995-2019 Cybage Software Pvt. Ltd., India 
+  * http://www.cybage.com/pages/centers-of-excellence/ecommerce/ecommerce.aspx
+  */ 
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="default">
+        <job name="storepickup_cancel_delayed_orders_email" instance="Cybage\Storepickup\Cron\CancelDelayedPickups" method="runCron">
+            <schedule>*/2 * * * *</schedule>
+        </job>
+    </group>
+</config>

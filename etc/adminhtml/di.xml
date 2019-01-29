@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+  * Copyright (c) 1995-2019 Cybage Software Pvt. Ltd., India 
+  * http://www.cybage.com/pages/centers-of-excellence/ecommerce/ecommerce.aspx
+  */ 
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd"> 
+    <preference for ="Magento\Backend\Block\Page\Header" type="Cybage\Storepickup\Block\Adminhtml\Header"/>
+    <type name="Magento\Sales\Block\Adminhtml\Order\Create\Shipping\Method\Form">
+        <plugin name="addPickupStoreIdField" type="Cybage\Storepickup\Plugin\Sales\Block\Adminhtml\Order\Create\Storepickup" />
+    </type>  
+    <type name="Temando\Shipping\Block\Adminhtml\Sales\Order\View\Info">
+        <plugin name="changeLabel" type="Cybage\Storepickup\Plugin\Sales\Block\Adminhtml\Order\View\Info" />
+    </type>   
+    <type name="Magento\Sales\Model\AdminOrder\Create">
+        <plugin name="savePickupStoreIdField" type="Cybage\Storepickup\Plugin\Sales\Model\AdminOrder\SaveStorePickup" />
+    </type>       
+    <type name="Magento\Backend\Block\Menu">
+        <plugin name="handle_admin_menu_plugin" type="Cybage\Storepickup\Plugin\Backend\Block\Menu" sortOrder="10" disabled="false"  />
+    </type>
+    <type name="Magento\Config\Model\Config\TypePool">
+        <arguments>
+            <argument name="sensitive" xsi:type="array">
+                <item name="stores_section/stores_group/key" xsi:type="string">1</item>
+            </argument>
+        </arguments>
+    </type>
+</config>
