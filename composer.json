@@ -1,6 +1,6 @@
 {
     "name": "cybage/storepickup",
-    "description": "Module to add extra charge on COD payment method",
+    "description": "An extension to add option for store pickup shipping method on checkout page by Cybage",
     "authors": [
       {
         "name": "Cybage",
@@ -8,7 +8,19 @@
       }
     ],
     "require": {
-        "php": "~7.0.13|~7.1.0"
+        "php": "~7.1|~7.2.0",
+        "magento/framework": "^100.1||^101.0||^102.0",
+        "magento/module-checkout": "^100.1",
+        "magento/module-customer": "^100.1||^101.0||^102.0",
+        "magento/module-directory": "^100.1",
+        "magento/module-quote": "^100.1||^101.0",
+        "magento/module-sales": "^100.1||^101.0||^102.0",
+        "magento/module-store": "^100.1||^101.0"
+    },
+    "repositories": [
+    {
+        "type": "composer",
+        "url": "https://packagist.org/packages/cybage/storepickup"
     },
     "type": "magento2-module",
     "version": "1.0.0",
