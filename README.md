@@ -12,7 +12,7 @@
 ## Installation Method 2 - Installing using archive
   * Download [ZIP Archive](https://github.com/)
   * Extract files
-  * In your Magento 2 root directory create folder app/code/Cybage/InStorePickup
+  * In your Magento 2 root directory create folder app/code/Cybage/StorePickup
   * Copy files and folders from archive to that folder
   * In command line, using "cd", navigate to your Magento 2 root directory
   * Run commands:
