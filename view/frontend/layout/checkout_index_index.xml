@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+/**
+  * Copyright (c) 1995-2019 Cybage Software Pvt. Ltd., India 
+  * http://www.cybage.com/pages/centers-of-excellence/ecommerce/ecommerce.aspx
+  */ 
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="checkout.root">
+            <arguments>
+                <argument name="jsLayout" xsi:type="array">
+                    <item name="components" xsi:type="array">
+                        <item name="checkout" xsi:type="array">
+                            <item name="children" xsi:type="array">
+                                <item name="steps" xsi:type="array">
+                                    <item name="children" xsi:type="array">
+                                        <item name="shipping-step" xsi:type="array">
+                                            <item name="children" xsi:type="array">
+                                                <!-- add a new validator-->
+                                                     <item name="step-config" xsi:type="array">
+                                                         <item name="children" xsi:type="array">
+                                                             <item name="shipping-rates-validation" xsi:type="array">
+                                                                 <item name="children" xsi:type="array">
+                                                                     <item name="storepickup" xsi:type="array">
+                                                                         <item name="component" xsi:type="string">Cybage_Storepickup/js/view/storepickup</item>
+                                                                     </item>
+                                                                 </item>
+                                                             </item>
+                                                         </item>
+                                                     </item>
+                                                 
+                                                <item name="shippingAddress" xsi:type="array">
+                                                    <item name="children" xsi:type="array">
+                                                        <item name="shippingAdditional" xsi:type="array">
+                                                            <item name="component" xsi:type="string">uiComponent</item>
+                                                            <item name="displayArea" xsi:type="string">shippingAdditional</item>
+                                                            <item name="children" xsi:type="array">
+                                                                <item name="storepickupmap" xsi:type="array">
+                                                                    <item name="component" xsi:type="string">Cybage_Storepickup/js/view/storepickupmap</item>
+                                                                </item>
+                                                            </item>
+                                                        </item>
+                                                    </item>
+                                                </item>
+                                             </item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+            </arguments>
+        </referenceBlock>
+    </body>
+</page>

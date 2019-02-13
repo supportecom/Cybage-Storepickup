@@ -1,0 +1,105 @@
+<?php
+/**
+ * Cybage Store Pickup Plugin
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * It is available on the World Wide Web at:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you are unable to access it on the World Wide Web, please send an email
+ * To: Support_ecom@cybage.com.  We will send you a copy of the source file.
+ * @category   Store Pickup Plugin
+ * @package    Cybage_Storepickup
+ * @copyright  Copyright (c) 2019 Cybage Software Pvt. Ltd., India
+ * * http://www.cybage.com/coe/e-commerce
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @author     Cybage Software Pvt. Ltd. <Support_ecom@cybage.com>
+ */
+
+/** @var $block \Cybage\Storepickup\Block\Adminhtml\Order\Details */
+?>
+<?php
+    $markAsDeliverUrl = $block->getMarkAsDeliverUrl();     
+    $isAvailableForCompletion =  $block->isAvailableForCompletion();
+    $orderListUrl = $block->getBackUrl();
+?>
+<div class="page-main-actions">    <div class="page-actions-placeholder" style=""></div><div class="page-actions" data-ui-id="page-actions-toolbar-content-header"><div class="page-actions-inner" ><div class="page-actions-buttons">
+        <button id="back" title="<?php echo __('Back');?>" type="button" class="action-default scalable back" onclick="setLocation('<?php echo $orderListUrl;?>')" data-ui-id="paypal-order-view-back-button">
+    <span><?php echo __('Back');?></span>
+</button>
+<?php if ($isAvailableForCompletion) :?>
+<button id="mark_as_deliver" title="<?php echo __('Mark As Deliver');?>" type="button" class="action-default scalable reorder" data-ui-id="paypal-order-view-order-reorder-button">
+    <span><?php echo __('Mark As Deliver');?></span>
+</button>
+<?php endif;?>
+    </div></div></div>
+</div><div id="page:main-container" class="page-columns"><div id="container" class="main-col"><div class="admin__old"><div class="entry-edit order-view" id="sales_order_view"><div id="sales_order_view_tabs_order_info_content" style="" data-ui-id="sales-order-tabs-tab-content-order-info" aria-labelledby="sales_order_view_tabs_order_info" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-expanded="true" aria-hidden="false">
+
+<?php echo $block->getChildHtml("order_tab_info");?>
+
+                    
+<div id="popup-mpdal" style="display:none;">
+    <table> 
+        <tr>
+            <th><label>Receiver Name <sup style="color:red">*</sup></label></th>
+            <td><input type="text" id="receiver_name" name="receiver_name" value="<?php echo $block->getReceiverName();?>"/></td>
+        </tr>
+        <tr>
+            <th><label>Document Name <sup style="color:red">*</sup></label></th>
+            <td><input type="text" id="document_name" name="document_name" /></td>
+        </tr>
+        <tr>
+            <th><label>Document No <sup style="color:red">*</sup></label></th>
+            <td><input type="text" id="document_no" name="document_no" /></td>
+        </tr>
+    </table>
+    <div class="delivery_error" style="display:none;color:red;"><b>Please fill required field</b></div>
+</div>
+<style>
+    #popup-mpdal td, #popup-mpdal th {
+        padding: 4%;
+        width:170px;
+    }
+</style>
+<script>
+    require(
+            [
+                'jquery',
+                'Magento_Ui/js/modal/modal'
+            ],
+            function (
+                    $,
+                    modal
+                    ) {
+                var options = {
+                    type: 'popup',
+                    responsive: true,
+                    innerScroll: true,
+                    title: 'Delivery Details',
+                    buttons: [{
+                            text: $.mage.__('Continue'),
+                            class: '',
+                            click: function () {
+                                var receiver_name = $("#receiver_name").val();
+                                var document_name = $("#document_name").val();
+                                var document_no = $("#document_no").val();
+                                
+                                if(receiver_name == '' || document_name == '' || document_no == '' ){
+                                    $(".delivery_error").show();
+                                    return false;
+                                } 
+                                var redirection = "<?php echo $markAsDeliverUrl;?>";
+                                redirection = redirection + 'receiver_name/' + receiver_name + '/document_name/' + document_name + '/document_no/' + document_no;
+                                location.href = redirection;
+                            }
+                        }]
+                };
+
+                var popup = modal(options, $('#popup-mpdal'));
+                $("#mark_as_deliver").click(function () {
+                    $("#popup-mpdal").modal("openModal");
+                });
+            }
+    );
+</script>

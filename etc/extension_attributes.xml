@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+/**
+  * Copyright (c) 1995-2019 Cybage Software Pvt. Ltd., India 
+  * http://www.cybage.com/pages/centers-of-excellence/ecommerce/ecommerce.aspx
+  */ 
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Api/etc/extension_attributes.xsd">
+    <extension_attributes for="Magento\Checkout\Api\Data\ShippingInformationInterface">
+        <attribute code="pickupstore_id" type="string"/>
+    </extension_attributes>
+</config>

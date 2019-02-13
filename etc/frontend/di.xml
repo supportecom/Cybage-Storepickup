@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+/**
+  * Copyright (c) 1995-2019 Cybage Software Pvt. Ltd., India 
+  * http://www.cybage.com/pages/centers-of-excellence/ecommerce/ecommerce.aspx
+  */ 
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+   <preference for="Magento\Checkout\Block\Onepage\Success" type="Cybage\Storepickup\Block\Onepage\StorepickupSuccess"/>
+    <type name="Magento\Checkout\Model\CompositeConfigProvider">
+        <arguments>
+            <argument name="configProviders" xsi:type="array">
+                <item name="custom_payment_config_provider" xsi:type="object">Cybage\Storepickup\Model\StorepickupConfigProvider</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

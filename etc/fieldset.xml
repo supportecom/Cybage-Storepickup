@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+  * Copyright (c) 1995-2019 Cybage Software Pvt. Ltd., India 
+  * http://www.cybage.com/pages/centers-of-excellence/ecommerce/ecommerce.aspx
+  */ 
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:DataObject/etc/fieldset.xsd">
+    <scope id="global">
+        <fieldset id="sales_convert_quote_address">
+            <field name="pickupstore_id">
+                <aspect name="to_order" />
+            </field>
+        </fieldset>
+    </scope>
+</config>

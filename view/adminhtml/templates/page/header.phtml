@@ -1,0 +1,94 @@
+<?php
+/**
+ * Cybage Store Pickup Plugin
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * It is available on the World Wide Web at:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you are unable to access it on the World Wide Web, please send an email
+ * To: Support_ecom@cybage.com.  We will send you a copy of the source file.
+ * @category   Store Pickup Plugin
+ * @package    Cybage_Storepickup
+ * @copyright  Copyright (c) 2019 Cybage Software Pvt. Ltd., India
+ * * http://www.cybage.com/coe/e-commerce
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @author     Cybage Software Pvt. Ltd. <Support_ecom@cybage.com>
+ */
+
+/** @var $block \Cybage\Storepickup\Block\Adminhtml\Header */
+?>
+<?php
+switch ($block->getShowPart()):
+    case 'logo':
+        ?>
+        <?php $edition = $block->hasEdition() ? 'data-edition="' . $block->escapeHtml($block->getEdition()) . '"' : ''; ?>
+        <?php $logoSrc = ($block->hasLogoImageSrc()) ? $block->escapeHtml($block->getLogoImageSrc()) : 'images/magento-logo.svg' ?>
+        <a
+            href="<?php /* @escapeNotVerified */ echo $block->getHomeLink() ?>"
+            <?php /* @escapeNotVerified */ echo $edition; ?>
+            class="logo">
+            <img class="logo-img" src="<?php /* @escapeNotVerified */ echo $block->getViewFileUrl($logoSrc) ?>"
+                 alt="<?php echo $block->escapeHtml(__('Magento Admin Panel')) ?>"/>
+        </a>
+        <?php break; ?>
+    <?php case 'user': ?>
+        <div class="admin-user admin__action-dropdown-wrap">
+            <a
+                href="<?php /* @escapeNotVerified */ echo $block->getUrl('adminhtml/system_account/index') ?>"
+                class="admin__action-dropdown"
+                title="<?php echo $block->escapeHtml(__('My Account')) ?>"
+                data-mage-init='{"dropdown":{}}'
+                data-toggle="dropdown">
+                <span class="admin__action-dropdown-text">
+                    <span class="admin-user-account-text"><?php echo $block->escapeHtml($block->getUser()->getUsername()); ?></span>
+                </span>
+            </a>
+            <ul class="admin__action-dropdown-menu">
+                <?php if ($block->getAuthorization()->isAllowed('Magento_Backend::myaccount')): ?>
+                    <li>
+                        <?php
+                        $isStoreLogin = $this->helper('Cybage\Storepickup\Helper\Data')->isStoreLogin();
+                        if ($isStoreLogin) {
+                            $storeId = $this->helper('Cybage\Storepickup\Helper\Data')->getStoreId();
+                            ?>
+                            <a
+                                href="<?php /* @escapeNotVerified */ echo $block->getUrl('storepickup/stores/addrow/id/' . $storeId) ?>"
+                                <?php /* @escapeNotVerified */ echo $block->getUiId('user', 'account', 'settings') ?>
+                                title="<?php echo $block->escapeHtml(__('My Account')) ?>">
+                                <?php /* @escapeNotVerified */ echo __('My Account') ?> (<span class="admin-user-name"><?php echo $block->escapeHtml($block->getUser()->getUsername()); ?></span>)
+                            </a>
+                        <?php } else {
+                            ?>
+                            <a
+                                href="<?php /* @escapeNotVerified */ echo $block->getUrl('adminhtml/system_account/index') ?>"
+                                <?php /* @escapeNotVerified */ echo $block->getUiId('user', 'account', 'settings') ?>
+                                title="<?php echo $block->escapeHtml(__('Account Setting')) ?>">
+                                <?php /* @escapeNotVerified */ echo __('Account Setting') ?> (<span class="admin-user-name"><?php echo $block->escapeHtml($block->getUser()->getUsername()); ?></span>)
+                            </a>
+                        </li>
+                    <?php }endif; ?>
+                <li>
+                    <a
+                        href="<?php /* @escapeNotVerified */ echo $block->getBaseUrl(); ?>"
+                        title="<?php echo $block->escapeHtml(__('Customer View')); ?>"
+                        target="_blank" class="store-front">
+                            <?php /* @escapeNotVerified */ echo __('Customer View'); ?>
+                    </a>
+                </li>
+                <li>
+                    <a
+                        href="<?php /* @escapeNotVerified */ echo $block->getLogoutLink() ?>"
+                        class="account-signout"
+                        title="<?php echo $block->escapeHtml(__('Sign Out')) ?>">
+                            <?php /* @escapeNotVerified */ echo __('Sign Out') ?>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <?php break; ?>
+    <?php case 'other': ?>
+        <?php echo $block->getChildHtml(); ?>
+        <?php break; ?>
+<?php endswitch; ?>

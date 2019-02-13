@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+  * Copyright (c) 1995-2019 Cybage Software Pvt. Ltd., India 
+  * http://www.cybage.com/pages/centers-of-excellence/ecommerce/ecommerce.aspx
+  */ 
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <carriers>
+            <!--[Carrier's system identifier]-->
+            <storepickup>
+                <!--[Carrier's activate/deactivate flag default value]-->
+                <active>0</active>
+                <!--[Carrier's title default value]-->
+                <title>Storepick Shipping Provider</title>
+                <name>Storepick Shipping Provider</name>
+                <handling_type>F</handling_type>
+                <price>0</price>
+                <!--[Carrier's model class]-->
+                <model>Cybage\Storepickup\Model\Carrier</model>
+                <!--[Error message displays on storefront if carrier's methods unavailable]-->
+                <specificerrmsg>This shipping method is currently unavailable. If you would like to ship using this shipping method, please contact us.</specificerrmsg>
+            </storepickup>
+        </carriers>
+        <stores_section>
+            <stores_group>
+                <key backend_model="Magento\Config\Model\Config\Backend\Encrypted" />
+                <user_creation>1</user_creation>
+            </stores_group>
+            <stores_order_settings>
+                <enable_autocancel>1</enable_autocancel>
+            </stores_order_settings>
+            <storepickup_map>
+                <api_key>AIzaSyDeXtyfepVhimdfjEAHAlWA1d56pEBoLG4</api_key>
+                <geocodeapi_url>https://maps.google.com/maps/api/geocode/json?address=</geocodeapi_url>
+                <zoom>13</zoom>
+                <latitude>51.4935057</latitude>
+                <longitude>-0.1506621</longitude>
+                <radius>10</radius>
+            </storepickup_map>    
+            <storepickup_individual>
+                <zoom_individual>16</zoom_individual>
+            </storepickup_individual>
+            <storepickup_error_message>
+                <method_not_available>This shipping method is not available. To use this shipping method, enter City, State, Zipcode, Country</method_not_available>
+                <method_not_available_for_address>Store Pickup is not available on entered address</method_not_available_for_address>
+            </storepickup_error_message>
+            <emails>
+                <order>
+                    <template>cybage_storepickup_emails_order_template</template>
+                </order>
+            </emails>
+        </stores_section>
+    </default>
+</config>

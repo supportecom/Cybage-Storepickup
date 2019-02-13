@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+/**
+  * Copyright (c) 1995-2019 Cybage Software Pvt. Ltd., India 
+  * http://www.cybage.com/pages/centers-of-excellence/ecommerce/ecommerce.aspx
+  */ 
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Cybage\Storepickup\Api\Data\GridInterface" type="Cybage\Storepickup\Model\Stores" />
+
+    <type name="Cybage\Storepickup\Logger\Handler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+    <type name="Cybage\Storepickup\Logger\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">customLogHandler</argument>
+            <argument name="handlers"  xsi:type="array">
+                <item name="system" xsi:type="object">Cybage\Storepickup\Logger\Handler</item>
+            </argument>
+        </arguments>
+    </type>    
+    <virtualType name="Cybage\Storepickup\Model\ResourceModel\Stores\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">cybage_stores_profile</argument>
+            <argument name="resourceModel" xsi:type="string">Cybage\Storepickup\Model\ResourceModel\Stores</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="stores_record_list_data_source" xsi:type="string">Cybage\Storepickup\Model\ResourceModel\Stores\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Magento\Sales\Model\ResourceModel\Order\Grid" type="Magento\Sales\Model\ResourceModel\Grid">
+        <arguments>
+            <argument name="columns" xsi:type="array">
+                <item name="pickupstore_id" xsi:type="string">sales_order.pickupstore_id</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Checkout\Model\ShippingInformationManagement">
+        <plugin name="sr_save_pickupstore_id_in_quote" type="Cybage\Storepickup\Plugin\Checkout\Model\ShippingInformationManagement" sortOrder="1"/>
+    </type>
+    <virtualType name="Cybage\Storepickup\Model\ResourceModel\Orders\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">sales_order_grid</argument>
+            <argument name="resourceModel" xsi:type="string">Cybage\Storepickup\Model\ResourceModel\Orders</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="stores_order_list_data_source" xsi:type="string">Cybage\Storepickup\Model\ResourceModel\Orders\Collection</item>
+            </argument>
+        </arguments>
+    </type>    
+</config>

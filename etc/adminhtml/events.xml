@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+  * Copyright (c) 1995-2019 Cybage Software Pvt. Ltd., India 
+  * http://www.cybage.com/pages/centers-of-excellence/ecommerce/ecommerce.aspx
+  */ 
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="core_layout_render_element">
+        <observer name="cybage_pickupdate_add_to_order_view" instance="Cybage\Storepickup\Observer\Backend\AddHtmlToOrderShippingViewObserver" />
+    </event>
+    <event name="controller_action_predispatch_mui_index_render">
+        <observer name="store_list_observer" instance="Cybage\Storepickup\Observer\Backend\StoreFilterObserver"/>
+    </event>
+</config>

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+  * Copyright (c) 1995-2019 Cybage Software Pvt. Ltd., India 
+  * http://www.cybage.com/pages/centers-of-excellence/ecommerce/ecommerce.aspx
+  */ 
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="cybage_storepickup_emails_order_template" label="New Order" file="order_new.html" type="html" module="Cybage_Storepickup" area="frontend"/>
+    <template id="sales_email_order_guest_template" label="New Order for Guest" file="order_new_guest.html" type="html" module="Cybage_Storepickup" area="frontend"/>
+    <template id="storepickup_order_cancel_to_storeowner" label="Delayed Orders Email" file="delayed_orders.html" type="html" module="Cybage_Storepickup" area="frontend"/>
+</config>

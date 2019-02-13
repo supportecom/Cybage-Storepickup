@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+  * Copyright (c) 1995-2019 Cybage Software Pvt. Ltd., India 
+  * http://www.cybage.com/pages/centers-of-excellence/ecommerce/ecommerce.aspx
+  */ 
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <referenceBlock name="sales.order.history">
+                <action method="setTemplate">
+                    <argument name="template" xsi:type="string">Cybage_Storepickup::sales/order/history.phtml</argument>
+                </action>
+            </referenceBlock>
+         </referenceContainer>
+    </body>
+</page>
