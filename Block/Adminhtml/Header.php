@@ -24,6 +24,7 @@ namespace Cybage\Storepickup\Block\Adminhtml;
 /**
  * Class Header
  */
+
 class Header extends \Magento\Backend\Block\Page\Header
 {
 

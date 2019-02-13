@@ -363,6 +363,10 @@ class Data extends AbstractHelper {
             if ($regionName)
                 $url .= "&region=" . $regionName;
             $url = $url . '&key=' . $apiKey;
+<<<<<<< HEAD
+=======
+
+>>>>>>> e9beab899df565c05c8282107dc694cb35c192f7
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
