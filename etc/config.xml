@@ -32,7 +32,6 @@
                 <enable_autocancel>1</enable_autocancel>
             </stores_order_settings>
             <storepickup_map>
-                <api_key>AIzaSyDeXtyfepVhimdfjEAHAlWA1d56pEBoLG4</api_key>
                 <geocodeapi_url>https://maps.google.com/maps/api/geocode/json?address=</geocodeapi_url>
                 <zoom>13</zoom>
                 <latitude>51.4935057</latitude>
