@@ -295,7 +295,7 @@ class Save extends \Magento\User\Controller\Adminhtml\User {
                 // Go to grid page
                 $this->_redirect('*/*/');
             } catch (\Exception $e) {
-                $this->messageManager->addError($e->getMessage());
+               // $this->messageManager->addError($e->getMessage());
                 $this->_redirect('*/*/addrow', ['id' => $storesModel->getStoreId()]);
             }
         }
