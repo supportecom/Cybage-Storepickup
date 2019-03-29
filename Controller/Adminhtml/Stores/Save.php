@@ -132,7 +132,7 @@ class Save extends \Magento\User\Controller\Adminhtml\User {
             $storesModel = $this->storesFactory->create();
             $storeId = 0;
             if ($this->getRequest()->getParam('store_id')) {
-                echo $storeId = $this->getRequest()->getParam('store_id');
+                $storeId = $this->getRequest()->getParam('store_id');
                 $storesModel->load($storeId);
             }
             $formData = $this->getRequest()->getParam('store_form');
