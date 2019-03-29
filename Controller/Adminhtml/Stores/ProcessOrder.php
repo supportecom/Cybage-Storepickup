@@ -58,9 +58,13 @@ class ProcessOrder extends \Magento\Framework\App\Action\Action
      * @var ShipmentNotifier
      */
     protected $shipmentNotifier;
-    
+
+    /*
+     * @var $_convertOrder
+     */
+    protected $_convertOrder;
     /**
-     * 
+     *
      * @param \Magento\Framework\App\Action\Context $context
      * @param \Magento\Sales\Api\OrderRepositoryInterface $orderRepository
      * @param \Magento\Sales\Model\Order\ShipmentRepository $shipmentRepository
@@ -68,6 +72,7 @@ class ProcessOrder extends \Magento\Framework\App\Action\Action
      * @param \Magento\Shipping\Model\ShipmentNotifier $shipmentNotifier
      * @param \Magento\Sales\Model\Service\InvoiceService $invoiceService
      * @param \Magento\Framework\DB\Transaction $transaction
+     * @param \Magento\Sales\Model\Convert\Order $convertOrder
      */
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
@@ -76,7 +81,8 @@ class ProcessOrder extends \Magento\Framework\App\Action\Action
         \Magento\Sales\Model\Order\ShipmentFactory $shipmentFactory,
         \Magento\Shipping\Model\ShipmentNotifier $shipmentNotifier,
         \Magento\Sales\Model\Service\InvoiceService $invoiceService,
-        \Magento\Framework\DB\Transaction $transaction
+        \Magento\Framework\DB\Transaction $transaction,
+        \Magento\Sales\Model\Convert\Order $convertOrder
     ) {
         $this->_orderRepository = $orderRepository;
         $this->_invoiceService = $invoiceService;
@@ -84,6 +90,7 @@ class ProcessOrder extends \Magento\Framework\App\Action\Action
         $this->shipmentFactory = $shipmentFactory;
         $this->shipmentRepository = $shipmentRepository;
         $this->shipmentNotifier = $shipmentNotifier;
+        $this->_convertOrder = $convertOrder;
         parent::__construct($context);
     }
     /**
@@ -121,8 +128,6 @@ class ProcessOrder extends \Magento\Framework\App\Action\Action
      */
     protected function createShipment($order)
     {
-        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-        
         // Check if order can be shipped or has already shipped
         if (!$order->canShip()) {
             throw new \Magento\Framework\Exception\LocalizedException(
@@ -130,41 +135,30 @@ class ProcessOrder extends \Magento\Framework\App\Action\Action
             );
         }
 
-// Initialize the order shipment object
-        $convertOrder = $objectManager->create('Magento\Sales\Model\Convert\Order');
-        $shipment = $convertOrder->toShipment($order);
+        // Initialize the order shipment object
+        $shipment = $this->_convertOrder->toShipment($order);
 
-// Loop through order items
+        // Loop through order items
         foreach ($order->getAllItems() AS $orderItem) {
             // Check if order item has qty to ship or is virtual
             if (!$orderItem->getQtyToShip() || $orderItem->getIsVirtual()) {
                 continue;
             }
-
             $qtyShipped = $orderItem->getQtyToShip();
-
             // Create shipment item with qty
-            $shipmentItem = $convertOrder->itemToShipmentItem($orderItem)->setQty($qtyShipped);
-
+            $shipmentItem = $this->_convertOrder->itemToShipmentItem($orderItem)->setQty($qtyShipped);
             // Add shipment item to shipment
             $shipment->addItem($shipmentItem);
         }
-
-// Register shipment
+        // Register shipment
         $shipment->register();
-
         $shipment->getOrder()->setIsInProcess(true);
-
         try {
             // Save created shipment and order
             $shipment->save();
             $shipment->getOrder()->save();
-
             // Send email
-            $objectManager->create('Magento\Shipping\Model\ShipmentNotifier')
-                    ->notify($shipment);
-
-            $shipment->save();
+            $this->shipmentNotifier->notify($shipment);
         } catch (\Exception $e) {
             throw new \Magento\Framework\Exception\LocalizedException(
             __($e->getMessage())

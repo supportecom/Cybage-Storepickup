@@ -315,6 +315,7 @@ class Carrier extends AbstractCarrier implements CarrierInterface {
      * @return type
      */
     public function getStores($latLng) {
+        if(isset($latLng['latitude']) && isset($latLng['longitude'])) {
         $lat = $latLng['latitude'];
         $lng = $latLng['longitude'];
         if(!$this->authSession->isLoggedIn()){
@@ -368,5 +369,8 @@ class Carrier extends AbstractCarrier implements CarrierInterface {
         } else {
             return false;
         }
+    } else {
+        return false;
+    }
     }
 }

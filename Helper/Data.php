@@ -352,21 +352,19 @@ class Data extends AbstractHelper {
      * @return array | boolean
      */
     public function getLatLong($address, $regionName = '') {
-        $error_msg = '';
+        $error_msg = __('There is issue with this address. Unable to locate locate store on Google Map.');
         if (!empty($address)) {
             $address = str_replace(" ", "+", $address);
             $address =  preg_replace('~[\r\n\t]+~', '', $address);
             $url = $this->getStoreConfig(self::GEOCODE_API_URL_CONFIG_PATH);
             $apiKey = $this->getStoreConfig(self::API_KEY);
-
+            if(empty($apiKey)) {
+                $error_msg = __('Please set Gmaps Api Key in Map settings from store configuration.');
+            }
             $url = $url . $address . "&sensor=false";
             if ($regionName)
                 $url .= "&region=" . $regionName;
             $url = $url . '&key=' . $apiKey;
-<<<<<<< HEAD
-=======
-
->>>>>>> e9beab899df565c05c8282107dc694cb35c192f7
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);

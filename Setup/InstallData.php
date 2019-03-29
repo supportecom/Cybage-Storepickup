@@ -72,46 +72,8 @@ class InstallData implements InstallDataInterface
 
     public function install(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
     {
-
         $setup->startSetup();
-        
-        /** @var EavSetup $eavSetup */
-        $eavSetup = $this->eavSetupFactory->create(['setup' => $setup]);
-
-        /**
-         * Add attributes to the eav/attribute
-         */
-        $eavSetup->addAttribute(
-            \Magento\Catalog\Model\Product::ENTITY,
-            'pickupstore_id',
-            [
-            'group' => 'General',
-            'type' => 'varchar',
-            'backend' => 'Magento\Eav\Model\Entity\Attribute\Backend\ArrayBackend',
-            'frontend' => '',
-            'label' => 'Pickup Store Name',
-            'input' => 'multiselect',
-            'class' => '',
-            'source' => 'Cybage\Storepickup\Model\Config\Source\Options',
-            'global' => \Magento\Catalog\Model\ResourceModel\Eav\Attribute::SCOPE_GLOBAL,
-            'visible' => true,
-            'required' => false,
-            'user_defined' => true,
-            'default' => '',
-            'searchable' => false,
-            'filterable' => false,
-            'comparable' => false,
-            'is_used_in_grid' => true,
-            'visible_on_front' => false,
-            'used_in_product_listing' => true,
-            'unique' => false,
-            'is_filterable_in_grid' => true,
-            'apply_to' => ''
-                ]
-        );
-        
-        
-        /**
+         /**
          * Admin 'store' role creation
          */
         $adminRoleData = [

@@ -129,11 +129,10 @@ class Save extends \Magento\User\Controller\Adminhtml\User {
         $isPost = $this->getRequest()->getPost();
         if ($isPost) {
             $data = $this->getRequest()->getPostValue();
-
             $storesModel = $this->storesFactory->create();
             $storeId = 0;
             if ($this->getRequest()->getParam('store_id')) {
-                $storeId = $this->getRequest()->getParam('store_id');
+                echo $storeId = $this->getRequest()->getParam('store_id');
                 $storesModel->load($storeId);
             }
             $formData = $this->getRequest()->getParam('store_form');
@@ -150,16 +149,16 @@ class Save extends \Magento\User\Controller\Adminhtml\User {
             ];
             $formattedAddress = implode(',', $addressArray);
             $latLongData = $this->storepickupHelper->getLatLong($formattedAddress);
-            
             if (isset($latLongData['longitude']) && isset($latLongData['latitude'])) {
                 $formData['latitude']  = $latLongData['latitude'];
                 $formData['longitude'] = $latLongData['longitude'];
             } elseif (isset($latLongData['error'])) {
+
                 $this->messageManager->addError($latLongData['error']);
                 $this->_getSession()->setFormData($formData);
                 $this->_redirect('storepickup/stores/addrow/id'.$storeId);
+                return;
             }
-
             $startTime = $formData['store_start_time'];
             $startTime = $startTime[0].','.$startTime[1].','.$startTime[2];
             $formData['store_start_time'] = $startTime;
@@ -177,7 +176,11 @@ class Save extends \Magento\User\Controller\Adminhtml\User {
 
                 if ($storeId) {
                     //Create store user
-                    $userData = $data['user_form'];
+                    if (isset($data['user_form'])) {
+                        $userData = $data['user_form'];
+                    } else if(isset($formData['user_form'])) {
+                        $userData = $formData['user_form'];
+                    }
                     $userId = 0;
                     if (isset($userData['user_id'])) {
                         $userId = $userData['user_id'];
@@ -295,7 +298,6 @@ class Save extends \Magento\User\Controller\Adminhtml\User {
                 // Go to grid page
                 $this->_redirect('*/*/');
             } catch (\Exception $e) {
-               // $this->messageManager->addError($e->getMessage());
                 $this->_redirect('*/*/addrow', ['id' => $storesModel->getStoreId()]);
             }
         }

@@ -42,7 +42,7 @@
             </group>
             <group id="storepickup_map" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Map settings</label>
-                <field id="api_key" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                <field id="api_key" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Gmaps Api Key</label>
                     <validate>required-entry</validate>
                     <comment>
@@ -51,7 +51,7 @@
                     <tooltip>
                         <![CDATA[To get a gmaps api key just login to your google account and go https://developers.google.com/maps/documentation/javascript/get-api-key and press on "get key".]]>
                     </tooltip>
-                </field>                
+                </field>
                  <field id="geocodeapi_url" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Geocode Api Url</label>
                     <validate>required-entry</validate>
