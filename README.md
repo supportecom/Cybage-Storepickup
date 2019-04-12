@@ -7,7 +7,7 @@
 ## Installation Method 1 - Installing via composer
   * Open command line
   * Using command "cd" navigate to your magento2 root directory
-  * Run command: composer require cybage/storepickup
+  * Run command: composer require cybage/storepickup:1.0.0
 
 ## Installation Method 2 - Installing using archive
   * Download [ZIP Archive](https://github.com/)
